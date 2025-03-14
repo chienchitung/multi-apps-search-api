@@ -160,6 +160,30 @@ curl "http://localhost:8000/search-multiple?search_terms=netflix&search_terms=yo
 
 # 查看詳細回應
 curl -v http://localhost:8000/search/netflix | json_pp
+
+# 使用 API Key（Bearer Token 方式）
+curl -H "Authorization: Bearer your_api_key_here" http://localhost:8000/search/netflix
+
+# 使用 API Key（Query Parameter 方式）
+curl "http://localhost:8000/search/netflix?api_key=your_api_key_here"
+
+# 使用 API Key（Header 方式）
+curl -H "X-API-Key: your_api_key_here" http://localhost:8000/search/netflix
+
+# 同時使用 API Key 和其他參數
+curl -H "Authorization: Bearer your_api_key_here" \
+     -H "Accept: application/json" \
+     -H "Content-Type: application/json" \
+     http://localhost:8000/search/netflix
+```
+
+#### 使用環境變數的範例
+```bash
+# 設定 API Key 環境變數
+export API_KEY="your_api_key_here"
+
+# 使用環境變數發送請求
+curl -H "Authorization: Bearer $API_KEY" http://localhost:8000/search/netflix
 ```
 
 ## 部署指南
@@ -214,7 +238,3 @@ curl -v http://localhost:8000/search/netflix | json_pp
   ]
 }
 ```
-
-## 授權
-
-MIT License 
